@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>큐랑 공식 홈페이지</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: #f49acb;
+  --pink-light: #fff0f8;
+  --sky: #9edcf4;
+  --sky-light: #effaff;
+  --text: #35435c;
+  --sub: #8190a8;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(#f8d9eb 1px, transparent 1px),
+    #fffafd;
+  background-size: 18px 18px;
+}
+
+button, a {
+  font: inherit;
+}
+
+.banner {
+  height: 245px;
+  background: linear-gradient(120deg, #f9c8e3, #b8e8fa, #f7d7ec);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner::before {
+  content: "🪼";
+  font-size: 85px;
+  opacity: .22;
+  position: absolute;
+  left: 10%;
+  top: 25px;
+}
+
+.banner::after {
+  content: "🪼";
+  font-size: 110px;
+  opacity: .2;
+  position: absolute;
+  right: 10%;
+  bottom: 5px;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 1;
+}
+
+.banner h1 {
+  color: white;
+  font-size: clamp(30px, 6vw, 52px);
+  margin: 0;
+  text-shadow: 0 3px 10px #9e8cb7;
+  letter-spacing: 5px;
+}
+
+.banner p {
+  color: white;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  overflow-x: auto;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid #f2dce9;
+  scrollbar-width: none;
+}
+
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-button {
+  flex: 1 0 110px;
+  min-height: 58px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #8b8296;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-button:hover,
+.nav-button.active {
+  color: #dc6da8;
+  border-bottom-color: #ee86bd;
+}
+
+.notice {
+  background: #fce7f3;
+  padding: 13px 5%;
+  color: #c65391;
+  font-size: 13px;
+}
+
+main {
+  max-width: 1050px;
+  margin: 35px auto;
+  padding: 0 22px;
+  min-height: 450px;
+}
+
+.page {
+  display: none;
+  animation: appear .3s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.page-title h2 {
+  font-size: 30px;
+  margin: 0;
+  color: #35435c;
+}
+
+.jelly-icon {
+  font-size: 35px;
+}
+
+.intro {
+  background: linear-gradient(120deg, #fce9f5, #e9f8ff);
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+}
+
+.intro h3 {
+  font-size: 23px;
+  margin-top: 0;
+}
+
+.intro p {
+  line-height: 1.8;
+  color: #65758d;
+}
+
+.section-title {
+  font-size: 19px;
+  margin: 30px 0 15px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #f1e3ee;
+  border-radius: 17px;
+  padding: 22px;
+  box-shadow: 0 4px 14px rgba(100,80,120,.04);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+}
+
+.card p {
+  color: var(--sub);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.link-button {
+  display: inline-block;
+  text-decoration: none;
+  background: #fce8f4;
+  color: #c45b95;
+  padding: 10px 17px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.link-button:hover {
+  background: #f8d3e8;
+}
+
+.sky-button {
+  background: #e3f6fd;
+  color: #438cae;
+}
+
+.placeholder {
+  background: linear-gradient(135deg, #fce8f4, #e5f6ff);
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9c8fa9;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.wardrobe-box {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #f1e3ee;
+  margin-bottom: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 15px;
+  color: #a49aad;
+  background: #fff4fa;
+  font-size: 12px;
+  line-height: 2;
+}
+
+@media (max-width: 600px) {
+  .banner {
+    height: 165px;
+  }
+
+  .banner h1 {
+    letter-spacing: 2px;
+  }
+
+  main {
+    margin-top: 25px;
+    padding: 0 15px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro {
+    padding: 22px;
+  }
+
+  .page-title h2 {
+    font-size: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 상단 일러스트 배너 -->
+<header class="banner">
+  <div class="banner-text">
+    <h1>QRANG</h1>
+    <p>큐랑의 작은 바다에 오신 걸 환영합니다 🪼</p>
+  </div>
+</header>
+
+<!-- 상단 메뉴: 새 메뉴는 이 부분에 추가 -->
+<nav>
+  <button class="nav-button active" data-page="youtube">유튜브</button>
+  <button class="nav-button" data-page="soop">SOOP</button>
+  <button class="nav-button" data-page="cafe">팬카페</button>
+  <button class="nav-button" data-page="comics">만화</button>
+  <button class="nav-button" data-page="wardrobe">옷장</button>
+</nav>
+
+<!-- 공지 -->
+<div class="notice">
+  🪼 공지　큐랑의 홈페이지에 오신 걸 환영합니다!
+</div>
+
+<main>
+
+<!-- 유튜브 -->
+<section class="page active" id="youtube">
+  <div class="page-title">
+    <span class="jelly-icon">🪼</span>
+    <h2>큐랑의 유튜브</h2>
+  </div>
+
+  <div class="intro">
+    <h3>안녕하세요! 큐랑입니다 💗</h3>
+    <p>
+      큐랑의 유튜브 영상과 쇼츠를 만나보세요.<br>
+      재미있는 영상들이 기다리고 있어요!
+    </p>
+    <a class="link-button" href="#" target="_blank">유튜브 채널 방문하기 ↗</a>
+  </div>
+
+  <h3 class="section-title">🎬 큐랑의 영상</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="placeholder">대표 영상 썸네일</div>
+      <h3>첫 번째 영상</h3>
+      <p>큐랑의 첫 번째 영상을 소개하는 공간이에요.</p>
+      <a class="link-button" href="#" target="_blank">영상 보러 가기 ↗</a>
+    </div>
+
+    <div class="card">
+      <div class="placeholder">최근 영상 썸네일</div>
+      <h3>최근 업로드 영상</h3>
+      <p>가장 최근에 업로드한 영상을 소개해요.</p>
+      <a class="link-button" href="#" target="_blank">최신 영상 보기 ↗</a>
+    </div>
+
+    <div class="card">
+      <div class="placeholder">쇼츠 썸네일</div>
+      <h3>유튜브 쇼츠</h3>
+      <p>짧고 재미있는 큐랑의 쇼츠 모음!</p>
+      <a class="link-button" href="#" target="_blank">쇼츠 보러 가기 ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOOP -->
+<section class="page" id="soop">
+  <div class="page-title">
+    <span class="jelly-icon">📺</span>
+    <h2>큐랑의 SOOP</h2>
+  </div>
+
+  <div class="intro">
+    <h3>방송에서 만나요! 🩵</h3>
+    <p>큐랑의 라이브 방송과 방송 관련 안내를 확인할 수 있어요.</p>
+    <a class="link-button sky-button" href="#" target="_blank">SOOP 방송국 방문하기 ↗</a>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🔴 라이브 방송</h3>
+      <p>현재 진행 중인 방송을 확인하고 참여해 보세요.</p>
+      <a class="link-button" href="#" target="_blank">라이브 입장하기 ↗</a>
+    </div>
+
+    <div class="card">
+      <h3>💬 방송 채팅</h3>
+      <p>방송에 참여해서 다른 해파리들과 함께 이야기해요.</p>
+      <a class="link-button" href="#" target="_blank">채팅 참여하기 ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- 팬카페 -->
+<section class="page" id="cafe">
+  <div class="page-title">
+    <span class="jelly-icon">🏠</span>
+    <h2>큐랑 팬카페</h2>
+  </div>
+
+  <div class="intro">
+    <h3>해파리들의 작은 쉼터</h3>
+    <p>큐랑의 소식과 팬들의 이야기를 나누는 공간이에요.</p>
+    <a class="link-button" href="#" target="_blank">팬카페 바로가기 ↗</a>
+  </div>
+
+  <div class="card">
+    <h3>📢 팬카페 안내</h3>
+    <p>공지사항, 팬아트, 자유게시판 등 다양한 소식을 만나보세요.</p>
+  </div>
+</section>
+
+<!-- 만화 -->
+<section class="page" id="comics">
+  <div class="page-title">
+    <span class="jelly-icon">📖</span>
+    <h2>큐랑의 만화</h2>
+  </div>
+
+  <div class="intro">
+    <h3>큐랑의 그림과 이야기</h3>
+    <p>큐랑이 그린 만화와 다양한 그림들을 구경해 보세요!</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="placeholder">X 만화 대표 이미지</div>
+      <h3>X (구 트위터)</h3>
+      <p>큐랑의 만화와 새로운 소식을 확인해 보세요.</p>
+      <a class="link-button" href="#" target="_blank">X 방문하기 ↗</a>
+    </div>
+
+    <div class="card">
+      <div class="placeholder">인스타그램 대표 이미지</div>
+      <h3>Instagram</h3>
+      <p>인스타그램에서도 큐랑의 그림을 만나보세요.</p>
+      <a class="link-button" href="#" target="_blank">인스타그램 방문하기 ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- 옷장 -->
+<section class="page" id="wardrobe">
+  <div class="page-title">
+    <span class="jelly-icon">👗</span>
+    <h2>큐랑의 옷장</h2>
+  </div>
+
+  <div class="intro">
+    <h3>오늘은 어떤 모습일까요?</h3>
+    <p>큐랑의 다양한 헤어스타일과 의상, 액세서리를 모아 놓은 공간이에요.</p>
+  </div>
+
+  <div class="wardrobe-box">
+    <h3>💇 헤어스타일</h3>
+    <div class="placeholder">헤어스타일 이미지 모음</div>
+    <p>큐랑의 다양한 머리 스타일을 소개할 예정이에요.</p>
+  </div>
+
+  <div class="wardrobe-box">
+    <h3>👗 의상</h3>
+    <div class="placeholder">의상 이미지 모음</div>
+    <p>방송과 특별한 날에 착용했던 의상들을 구경해 보세요.</p>
+  </div>
+
+  <div class="wardrobe-box">
+    <h3>✨ 액세서리</h3>
+    <div class="placeholder">액세서리 이미지 모음</div>
+    <p>큐랑의 다양한 소품과 장식들을 소개해요.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>🪼 QRANG OFFICIAL HOMEPAGE</p>
+  <p>큐랑과 해파리들의 작은 공간</p>
+</footer>
+
+<script>
+const buttons = document.querySelectorAll(".nav-button");
+const pages = document.querySelectorAll(".page");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const target = button.dataset.page;
+
+    buttons.forEach(item => item.classList.remove("active"));
+    pages.forEach(page => page.classList.remove("active"));
+
+    button.classList.add("active");
+    document.getElementById(target).classList.add("active");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+</script>
+
+</body>
+</html>
